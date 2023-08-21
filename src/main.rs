@@ -1,6 +1,6 @@
 mod ball;
 
-use crate::ball::{Ball, BORDER_RADIUS};
+use crate::ball::Ball;
 use ggez::conf::WindowMode;
 use ggez::event::EventHandler;
 use ggez::glam::{vec2, Vec2};
@@ -23,6 +23,8 @@ fn main() {
 
 pub const PHYSIC_STEP_COUNT: i32 = 400;
 pub const PHYSIC_STEP_LENGTH: f32 = 1.0 / PHYSIC_STEP_COUNT as f32;
+
+pub const BORDER_RADIUS: f32 = 400.0;
 
 struct Simulation {
     balls: Vec<Ball>,
@@ -111,7 +113,7 @@ impl EventHandler for Simulation {
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
         let mut canvas = graphics::Canvas::from_frame(ctx, Color::WHITE);
 
-        canvas.set_screen_coordinates(Rect::new(-100.0, 100.0, 200.0, -200.0));
+        canvas.set_screen_coordinates(Rect::new(-500.0, 500.0, 1000.0, -1000.0));
 
         let border_mesh = graphics::Mesh::new_circle(
             ctx,
@@ -139,18 +141,19 @@ impl EventHandler for Simulation {
         // When drawing through these calls, `DrawParam` will work as they are documented.
         canvas.draw(
             &fps_display,
-            graphics::DrawParam::from([-100.0, 100.0])
-                .scale(vec2(0.5, -0.5))
+            graphics::DrawParam::from([-500.0, 500.0])
+                .scale(vec2(3.0, -3.0))
                 .color(Color::BLACK),
         );
 
+        //todo
         let fps = self.balls.len();
         let fps_display = Text::new(format!("Balls: {fps}"));
         // When drawing through these calls, `DrawParam` will work as they are documented.
         canvas.draw(
             &fps_display,
-            graphics::DrawParam::from([-100.0, 90.0])
-                .scale(vec2(0.5, -0.5))
+            graphics::DrawParam::from([-500.0, 470.0])
+                .scale(vec2(3.0, -3.0))
                 .color(Color::BLACK),
         );
 

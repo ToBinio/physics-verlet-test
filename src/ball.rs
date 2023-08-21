@@ -1,3 +1,4 @@
+use crate::BORDER_RADIUS;
 use ggez::glam::{vec2, Vec2};
 use rand::Rng;
 use std::ops::{Add, AddAssign, Mul};
@@ -9,8 +10,6 @@ pub struct Ball {
 
     pub size: f32,
 }
-
-pub const BORDER_RADIUS: f32 = 80.0;
 
 impl Ball {
     pub fn new() -> Ball {
