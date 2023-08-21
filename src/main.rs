@@ -75,7 +75,7 @@ impl Simulation {
     }
 
     fn physics_tick(&mut self, dt: f32) {
-        let gravity = Vec2::new(0., -500.);
+        let gravity = Vec2::new(0., -1000.);
 
         for ball in &mut self.balls {
             ball.add_acceleration(gravity);
@@ -140,6 +140,16 @@ impl EventHandler for Simulation {
         canvas.draw(
             &fps_display,
             graphics::DrawParam::from([-100.0, 100.0])
+                .scale(vec2(0.5, -0.5))
+                .color(Color::BLACK),
+        );
+
+        let fps = self.balls.len();
+        let fps_display = Text::new(format!("Balls: {fps}"));
+        // When drawing through these calls, `DrawParam` will work as they are documented.
+        canvas.draw(
+            &fps_display,
+            graphics::DrawParam::from([-100.0, 90.0])
                 .scale(vec2(0.5, -0.5))
                 .color(Color::BLACK),
         );
